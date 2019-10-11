@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /wp-admin
+Disallow: /admin
+Disallow: /pub/ftp.nikcub.com/0day/.x/.x/.x/Photoshopv7[MAGNUM]/
+
+Sitemap: https://nikcub.me/sitemap.xml
