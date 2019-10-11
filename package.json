@@ -2,7 +2,7 @@
   "name": "@nc9/blog",
   "private": true,
   "description": "nikcub gatsby blog",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "author": "Nik Cubrilovic <nc9@protonmail.com>",
   "dependencies": {
     "@blocks/kit": "^0.0.28",
