@@ -21,15 +21,33 @@ export const query = graphql`
       body
       fields {
         slug
-        # title
-        # tags
-        # keywords
+        date
+        date_modified
+        git_modified
 
       }
       frontmatter {
         title
         date
         # date(formatString: "MMMM DD, YYYY")
+        featureImg: featureImage {
+          id
+          childImageSharp {
+            fluid(maxWidth: 960) {
+              aspectRatio
+              presentationWidth
+              # base64
+              tracedSVG
+              aspectRatio
+              src
+              srcSet
+              srcWebp
+              srcSetWebp
+              originalName
+              presentationHeight
+            }
+          }
+        }
       }
     }
   }

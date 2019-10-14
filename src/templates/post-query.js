@@ -21,6 +21,9 @@ export const query = graphql`
       body
       fields {
         slug
+        date
+        date_modified
+        git_modified
         # title
         # tags
         # keywords

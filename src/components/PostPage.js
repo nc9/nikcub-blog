@@ -23,7 +23,8 @@ const PostPage = ({ data }) => {
           display: "inline"
         }}>{data.mdx.frontmatter.title}</h3>
         {" "}-{" "}
-        <DateTime date={data.mdx.frontmatter.date} />
+        <p>Published: <DateTime date={data.mdx.frontmatter.date} /></p>
+        <p>Modified: <DateTime date={data.mdx.fields.git_modified} /></p>
         { data.mdx.frontmatter.featureImg && data.mdx.frontmatter.featureImg.childImageSharp.fluid &&
           <Img
             fluid={data.mdx.frontmatter.featureImg.childImageSharp.fluid}
