@@ -2,6 +2,8 @@
 title: Craig Wright is not Satoshi Nakamoto
 date: 2016-05-02T19:55:25+0000
 excerpt: Investigating the claim that Craig Wright is Bitcoin creator Satoshi Nakamoto
+featureImage: ../assets/craig_wright.png
+featureImageAlt: Craig Wright
 ---
 
 Craig Wright has claimed to be anonymous Bitcoin creator Satoshi Nakamoto.
