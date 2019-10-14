@@ -3,6 +3,7 @@ const path = require(`path`)
 const mkdirp = require(`mkdirp`)
 const crypto = require(`crypto`)
 const Debug = require(`debug`)
+const execa = require("execa")
 const { createFilePath } = require(`gatsby-source-filesystem`)
 const { urlResolve } = require(`gatsby-core-utils`)
 
@@ -23,6 +24,51 @@ const withDefaults = themeOptions => {
         assetPath,
     }
 }
+
+const gitModified = async absolutePath => {
+
+  const { stdout } = await execa("git", [
+    "log",
+    "-1",
+    "--pretty=format:%aI",
+    "--",
+    absolutePath
+  ])
+
+  if (stdout) {
+    return stdout
+  }
+}
+
+const gitLogs = async absolutePath => {
+
+  const { stdout } = await execa("git", [
+    "log",
+    "-1",
+    "--pretty=format:%aI,%H,%h,%an,%ae,%s",
+    "--",
+    absolutePath
+  ])
+
+  if (!stdout) {
+    return []
+  }
+
+  let logs = stdout.split("\n").map(l => {
+    [date, hash, hash_short, author, email, message ] = l.split(",")
+    return {
+      date,
+      hash,
+      hash_short,
+      author,
+      email,
+      message,
+    }
+  })
+
+  return logs
+}
+
 
 // // Ensure that content directories exist at site-level
 // exports.onPreBootstrap = ({ store }, themeOptions) => {
@@ -127,7 +173,7 @@ exports.onCreateNode = async (
   const source = fileNode.sourceInstanceName
 
   console.log(`${node.internal.type}, ${node.parent}, ${source}, ${postsPath}`)
-  console.log(fileNode)
+  // console.log(fileNode)
 
   if (node.internal.type === `Mdx` && ((source === "posts" || source === "mdx-pages" ))) {
     let slug
@@ -163,7 +209,8 @@ exports.onCreateNode = async (
       keywords: node.frontmatter.keywords || [],
     }
 
-
+    let gitModDate = await gitModified(fileNode.absolutePath)
+    let git_logs = await gitLogs(fileNode.absolutePath)
 
     createNodeField({
       node,
@@ -181,6 +228,18 @@ exports.onCreateNode = async (
       node,
       name: `date_modified`,
       value: fileNode.modifiedTime
+    })
+
+    createNodeField({
+      node,
+      name: `git_modified`,
+      value: gitModDate
+    })
+
+    createNodeField({
+      node,
+      name: `git_logs`,
+      value: git_logs
     })
 
     createNodeField({
