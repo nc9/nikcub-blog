@@ -166,7 +166,7 @@ function SEO({ description, lang, meta, title, article, page }) {
         '@id': `${site.siteMetadata.siteUrl}/#creator`,
       },
       datePublished: article.frontmatter.date,
-      dateModified: article.frontmatter.date_modified,
+      dateModified: article.fields.date_modified,
       // dateModified: postNode.last_publication_date,
       description,
       headline: title,
