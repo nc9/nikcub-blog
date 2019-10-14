@@ -37,7 +37,34 @@ module.exports = {
       options: {
         exclude: [
           "/test-post"
-        ]
+        ],
+        query: `{
+          site {
+            siteMetadata {
+              siteUrl
+            }
+          }
+          pages: allMdx(sort: {fields: frontmatter___date, order: DESC}, filter: {fields: {source: {in: ["posts", "mdx-pages"]}, title: {}}, frontmatter: {status: {ne: "draft"}}}) {
+            totalCount
+            nodes {
+              id
+              fields {
+                slug
+              }
+              frontmatter {
+                title
+                date
+              }
+              excerpt
+            }
+          }
+        }
+        `,
+        serialize: ({ site, pages }) => pages.nodes.map(p => ({
+          url: site.siteMetadata.siteUrl + p.fields.slug,
+          changefreq: 'daily',
+          priority: '0.8'
+        }))
       }
     },
     {
