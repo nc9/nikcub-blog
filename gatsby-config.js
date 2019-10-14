@@ -32,7 +32,14 @@ module.exports = {
     `gatsby-plugin-twitter`,
     `gatsby-plugin-emotion`,
     `gatsby-plugin-theme-ui`,
-    `gatsby-plugin-sitemap`,
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        exclude: [
+          "/test-post"
+        ]
+      }
+    },
     {
       resolve: `gatsby-plugin-typography`,
       options: {
