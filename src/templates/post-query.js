@@ -30,6 +30,24 @@ export const query = graphql`
         title
         date
         # date(formatString: "MMMM DD, YYYY")
+        featureImg: featureImage {
+          id
+          childImageSharp {
+            fluid(maxWidth: 960) {
+              aspectRatio
+              presentationWidth
+              # base64
+              tracedSVG
+              aspectRatio
+              src
+              srcSet
+              srcWebp
+              srcSetWebp
+              originalName
+              presentationHeight
+            }
+          }
+        }
       }
     }
     previous: mdx(id: { eq: $previousId }) {

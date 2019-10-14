@@ -4,6 +4,7 @@ module.exports = {
     title: `Nik Cubrilovic`,
     author: `Nik Cubrliovic`,
     description: `A weblog by Nik Cubrilovic`,
+    twitter: `nikcub`,
     social: [
       {
         name: `twitter`,
@@ -15,13 +16,14 @@ module.exports = {
       },
     ],
   },
+  mapping: { "Mdx.fields.featuredImage": `File.absolutePath` },
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-react-helmet-canonical-urls`,
       options: {
         siteUrl: `https://nikcub.me`,
-        noTrailingSlash: true,
+        // noTrailingSlash: true,
       },
     },
     `gatsby-transformer-sharp`,

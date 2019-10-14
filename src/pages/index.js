@@ -8,7 +8,7 @@ const IndexPage = ({ data }) => {
   console.log(data)
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="Home" description="Homepage and blog of Nik Cubrilovic" />
       <h4>{ data.allMdx.totalCount } Posts</h4>
       { data.allMdx.nodes.map(node  => (
         <PostExcerpt key={node.id} post={node} />

@@ -10,11 +10,9 @@ const Container = styled.div`
 `
 
 const PagePage = ({ data }) => {
-  console.log(data)
-
   return (
     <Layout>
-      <SEO title={data.mdx.frontmatter.title} description={data.mdx.excerpt} />
+      <SEO title={data.mdx.frontmatter.title} description={data.mdx.excerpt} page={data.mdx} />
       <Container key={data.mdx.id}>
         <h3 css={{
           display: "inline"

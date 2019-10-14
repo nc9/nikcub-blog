@@ -8,6 +8,8 @@ const { urlResolve } = require(`gatsby-core-utils`)
 
 const debug = Debug()
 
+const replaceTrailing = _path => _path.replace(/\/$/, ``)
+
 const withDefaults = themeOptions => {
     const basePath = `/`
     const postsPath = `${__dirname}/content/posts`
@@ -125,10 +127,12 @@ exports.onCreateNode = async (
   const source = fileNode.sourceInstanceName
 
   console.log(`${node.internal.type}, ${node.parent}, ${source}, ${postsPath}`)
-  // console.log(fileNode)
+  console.log(fileNode)
 
   if (node.internal.type === `Mdx` && ((source === "posts" || source === "mdx-pages" ))) {
     let slug
+
+
 
     if (node.frontmatter.slug) {
       if (path.isAbsolute(node.frontmatter.slug)) {
@@ -149,6 +153,8 @@ exports.onCreateNode = async (
       slug = urlResolve(basePath, filePath)
     }
 
+    // slug = replaceTrailing(slug)
+
     const fieldData = {
       title: node.frontmatter.title,
       tags: node.frontmatter.tags || [],
@@ -156,6 +162,8 @@ exports.onCreateNode = async (
       date: node.frontmatter.date,
       keywords: node.frontmatter.keywords || [],
     }
+
+
 
     createNodeField({
       node,
@@ -167,6 +175,12 @@ exports.onCreateNode = async (
       node,
       name: 'date',
       value: node.frontmatter.date,
+    })
+
+    createNodeField({
+      node,
+      name: `date_modified`,
+      value: fileNode.modifiedTime
     })
 
     createNodeField({
