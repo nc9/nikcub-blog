@@ -8,13 +8,13 @@ module.exports = {
     social: [
       {
         name: `twitter`,
-        url: `https://twitter.com/nikcub`,
+        url: `https://twitter.com/nikcub`
       },
       {
         name: `github`,
-        url: `https://github.com/nikcub`,
-      },
-    ],
+        url: `https://github.com/nc9`
+      }
+    ]
   },
   mapping: { "Mdx.fields.featuredImage": `File.absolutePath` },
   plugins: [
@@ -22,9 +22,9 @@ module.exports = {
     {
       resolve: `gatsby-plugin-react-helmet-canonical-urls`,
       options: {
-        siteUrl: `https://nikcub.me`,
+        siteUrl: `https://nikcub.me`
         // noTrailingSlash: true,
-      },
+      }
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
@@ -35,16 +35,14 @@ module.exports = {
     {
       resolve: `gatsby-plugin-sitemap`,
       options: {
-        exclude: [
-          "/test-post"
-        ]
+        exclude: ["/test-post"]
       }
     },
     {
       resolve: `gatsby-plugin-typography`,
       options: {
-        pathToConfigModule: `src/utils/typography`,
-      },
+        pathToConfigModule: `src/utils/typography`
+      }
     },
     // {
     //   resolve: `gatsby-transformer-remark`,
@@ -55,14 +53,14 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: "UA-149334218-1",
-      },
+        trackingId: "UA-149334218-1"
+      }
     },
     {
       resolve: `gatsby-plugin-s3`,
       options: {
-          bucketName: 'nikcub.me'
-      },
+        bucketName: "nikcub.me"
+      }
     },
     {
       resolve: `gatsby-plugin-mdx`,
@@ -73,45 +71,43 @@ module.exports = {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 960,
-              linkImagesToOriginal: false,
-            },
+              linkImagesToOriginal: false
+            }
           },
           // { resolve: `gatsby-remark-copy-linked-files` },
-          { resolve: `gatsby-remark-smartypants` },
+          { resolve: `gatsby-remark-smartypants` }
         ],
         plugins: ["gatsby-remark-images"],
-        remarkPlugins: [
-          require(`remark-slug`)
-        ],
-      },
+        remarkPlugins: [require(`remark-slug`)]
+      }
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/src/images`,
-        name: `images`,
-      },
+        name: `images`
+      }
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/posts`,
-        name: `posts`,
-      },
+        name: `posts`
+      }
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/pages`,
-        name: `mdx-pages`,
-      },
+        name: `mdx-pages`
+      }
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/assets`,
-        name: `assets`,
-      },
-    },
-  ],
-}
+        name: `assets`
+      }
+    }
+  ]
+};
