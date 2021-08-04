@@ -3,7 +3,7 @@ import { jsx } from '@emotion/react'
 import styled from '@emotion/styled'
 import HeaderLink from './HeaderLink'
 import HeaderMenuLink from './HeaderMenuLink'
-import Img from 'gatsby-image'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 const Header = styled.header`
   background: rebeccapurple;
@@ -24,14 +24,13 @@ const HeaderComponent = ({ headerImage, siteTitle }) => (
   <Header>
     <Menu>
       {headerImage ? (
-        <Img
-          fixed={headerImage}
-          // objectFit="cover"
-          // objectPosition="50% 50%"
+        <GatsbyImage
+          image={headerImage}
           alt=""
           css={{
             marginRight: '10px',
             marginTop: '0px',
+            float: 'left',
           }}
         />
       ) : (
@@ -39,7 +38,9 @@ const HeaderComponent = ({ headerImage, siteTitle }) => (
       )}
       <HeaderLink>{siteTitle}</HeaderLink>
       <HeaderMenu>
-        <HeaderMenuLink to="about">About</HeaderMenuLink>
+        <HeaderMenuLink to="about" css={{ marginTop: '10px' }}>
+          About
+        </HeaderMenuLink>
       </HeaderMenu>
     </Menu>
   </Header>

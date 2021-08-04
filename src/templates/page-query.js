@@ -1,6 +1,6 @@
-import { graphql } from "gatsby"
+import { graphql } from 'gatsby'
 
-import PagePage from "../components/PagePage"
+import PagePage from '../components/PagePage'
 
 export default PagePage
 
@@ -16,15 +16,14 @@ export const query = graphql`
       }
     }
     mdx(id: { eq: $id }) {
-      id,
-      excerpt,
+      id
+      excerpt
       body
       fields {
         slug
         date
         date_modified
         git_modified
-
       }
       frontmatter {
         title
@@ -33,19 +32,7 @@ export const query = graphql`
         featureImg: featureImage {
           id
           childImageSharp {
-            fluid(maxWidth: 960) {
-              aspectRatio
-              presentationWidth
-              # base64
-              tracedSVG
-              aspectRatio
-              src
-              srcSet
-              srcWebp
-              srcSetWebp
-              originalName
-              presentationHeight
-            }
+            gatsbyImageData(layout: CONSTRAINED)
           }
         }
       }

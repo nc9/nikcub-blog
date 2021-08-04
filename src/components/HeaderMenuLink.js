@@ -5,7 +5,7 @@ import styled from '@emotion/styled'
 
 const ListItem = styled.li`
   display: inline-block;
-  margin-right: 1rem;
+  margin-top: 10px;
 `
 
 const HeaderMenuLink = props => (
@@ -16,6 +16,7 @@ const HeaderMenuLink = props => (
         color: `white`,
         textDecoration: `none`,
         maxWidth: '50%',
+        marginTop: '10px',
       }}
     >
       {props.children}

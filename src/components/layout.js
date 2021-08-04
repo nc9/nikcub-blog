@@ -38,21 +38,9 @@ const Layout = ({ children }) => {
         }
       }
       file(name: { eq: "nik" }) {
+        name
         childImageSharp {
-          # Specify the image processing specifications right in the query.
-          # Makes it trivial to update as your page's design changes.
-          fixed(width: 32, height: 32) {
-            base64
-            tracedSVG
-            aspectRatio
-            width
-            height
-            src
-            srcSet
-            srcWebp
-            srcSetWebp
-            originalName
-          }
+          gatsbyImageData(layout: FIXED, width: 32, height: 32)
         }
       }
     }
@@ -62,7 +50,7 @@ const Layout = ({ children }) => {
     <MDXProvider>
       <>
         <Header
-          headerImage={data.file.childImageSharp.fixed}
+          headerImage={data.file.childImageSharp.gatsbyImageData}
           siteTitle={data.site.siteMetadata.title}
         />
         <Container>

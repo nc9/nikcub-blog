@@ -5,7 +5,6 @@ import SEOComponent from '../components/seo'
 import PostExcerpt from '../components/PostExcerpt'
 
 const IndexPage = ({ data }) => {
-  console.log(data)
   return (
     <Layout>
       <SEOComponent title="Home" description="Homepage and blog of Nik Cubrilovic" />

@@ -199,7 +199,7 @@ function SEOComponent({ description, lang, meta, title, article, page }) {
       image: {
         '@type': 'ImageObject',
         url: article.frontmatter.featureImg
-          ? article.frontmatter.featureImg.childImageSharp.fluid.src
+          ? article.frontmatter.featureImg.childImageSharp.gatsbyImageData.images.fallback.src
           : '',
       },
       mainEntityOfPage: {
@@ -235,7 +235,7 @@ function SEOComponent({ description, lang, meta, title, article, page }) {
     image: {
       '@type': 'ImageObject',
       url: page.frontmatter.featureImg
-        ? page.frontmatter.featureImg.childImageSharp.fluid.src
+        ? page.frontmatter.featureImg.childImageSharp.gatsbyImageData.images.fallback.src
         : '',
     },
     mainEntityOfPage: {
