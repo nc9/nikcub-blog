@@ -5,12 +5,12 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
-import PropTypes from "prop-types"
-import Helmet from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
+import React from 'react'
+import PropTypes from 'prop-types'
+import Helmet from 'react-helmet'
+import { useStaticQuery, graphql } from 'gatsby'
 
-function SEO({ description, lang, meta, title, article, page }) {
+function SEOComponent({ description, lang, meta, title, article, page }) {
   const { site, logo_small, logo_large } = useStaticQuery(
     graphql`
       query {
@@ -67,7 +67,7 @@ function SEO({ description, lang, meta, title, article, page }) {
   // console.log("site", site)
   // console.log("logo_small", logo_small)
 
-  let metaDescription = ""
+  let metaDescription = ''
 
   if (site.siteMetadata && site.siteMetadata.description) {
     metaDescription = site.siteMetadata.description
@@ -76,19 +76,19 @@ function SEO({ description, lang, meta, title, article, page }) {
   let schemaArticle = null
 
   const orgBreadcrumb = (site, article, type) => {
-    if (type === "page") {
+    if (type === 'page') {
       return {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
         itemListElement: [
           {
-            "@type": "ListItem",
+            '@type': 'ListItem',
             position: 1,
-            name: "Nik Cubrilovic",
+            name: 'Nik Cubrilovic',
             item: `${site.siteMetadata.siteUrl}`,
           },
           {
-            "@type": "ListItem",
+            '@type': 'ListItem',
             position: 2,
             name: article.frontmatter.title,
             item: `${site.siteMetadata.siteUrl}/${article.fields.slug}`,
@@ -98,23 +98,23 @@ function SEO({ description, lang, meta, title, article, page }) {
     }
 
     return {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
       itemListElement: [
         {
-          "@type": "ListItem",
+          '@type': 'ListItem',
           position: 1,
-          name: "Nik Cubrilovic",
+          name: 'Nik Cubrilovic',
           item: `${site.siteMetadata.siteUrl}`,
         },
         {
-          "@type": "ListItem",
+          '@type': 'ListItem',
           position: 2,
-          name: "Posts",
+          name: 'Posts',
           item: `${site.siteMetadata.siteUrl}/posts`,
         },
         {
-          "@type": "ListItem",
+          '@type': 'ListItem',
           position: 3,
           name: article.frontmatter.title,
           item: `${site.siteMetadata.siteUrl}/posts/${article.fields.slug}`,
@@ -125,47 +125,47 @@ function SEO({ description, lang, meta, title, article, page }) {
 
   const orgCreator = (input, site) => {
     let returnEnvelope = {
-      "@context": "http://schema.org",
-      "@id": `${site.siteMetadata.siteUrl}/#${input}`,
-      "@type": "Organization",
+      '@context': 'http://schema.org',
+      '@id': `${site.siteMetadata.siteUrl}/#${input}`,
+      '@type': 'Organization',
       address: {
-        "@type": "PostalAddress",
-        addressCountry: "AU",
-        addressLocality: "",
-        postalCode: "",
+        '@type': 'PostalAddress',
+        addressCountry: 'AU',
+        addressLocality: '',
+        postalCode: '',
       },
-      name: "Nik Cubrilovic",
+      name: 'Nik Cubrilovic',
       description: metaDescription,
       url: site.siteMetadata.siteUrl,
-      foundingLocation: "Australia",
+      foundingLocation: 'Australia',
       sameAs: [
-        "https://github.com/nikcub",
-        "https://twitter.com/nikcub",
-        "https://twitter.com/dir",
-        "https://en.wikipedia.org/wiki/Nik_Cubrilovic",
-        "https://youtube.com/nik",
+        'https://github.com/nikcub',
+        'https://twitter.com/nikcub',
+        'https://twitter.com/dir',
+        'https://en.wikipedia.org/wiki/Nik_Cubrilovic',
+        'https://youtube.com/nik',
       ],
     }
 
-    console.log("logo large is", logo_large)
+    console.log('logo large is', logo_large)
 
     if (logo_large && logo_large.childImageSharp.fixed) {
-      console.log("adding logo large")
+      console.log('adding logo large')
 
-      returnEnvelope["image"] = {
-        "@type": "ImageObject",
+      returnEnvelope['image'] = {
+        '@type': 'ImageObject',
         url: logo_large.childImageSharp.fixed.src,
-        height: "512",
-        width: "512",
+        height: '512',
+        width: '512',
       }
     }
 
     if (logo_small && logo_small.childImageSharp.fixed) {
-      returnEnvelope["logo"] = {
-        "@type": "ImageObject",
+      returnEnvelope['logo'] = {
+        '@type': 'ImageObject',
         url: logo_small.childImageSharp.fixed.src,
-        height: "60",
-        width: "60",
+        height: '60',
+        width: '60',
       }
     }
 
@@ -174,73 +174,73 @@ function SEO({ description, lang, meta, title, article, page }) {
 
   if (article) {
     schemaArticle = {
-      "@context": "http://schema.org",
-      "@type": "Article",
+      '@context': 'http://schema.org',
+      '@type': 'Article',
       author: {
-        "@id": `${site.siteMetadata.siteUrl}/#identity`,
+        '@id': `${site.siteMetadata.siteUrl}/#identity`,
       },
       copyrightHolder: {
-        "@id": `${site.siteMetadata.siteUrl}/#identity`,
+        '@id': `${site.siteMetadata.siteUrl}/#identity`,
       },
       // copyrightYear: postNode.first_publication_date,
       creator: {
-        "@id": `${site.siteMetadata.siteUrl}/#creator`,
+        '@id': `${site.siteMetadata.siteUrl}/#creator`,
       },
       publisher: {
-        "@id": `${site.siteMetadata.siteUrl}/#creator`,
+        '@id': `${site.siteMetadata.siteUrl}/#creator`,
       },
       datePublished: article.frontmatter.date,
       dateModified: article.fields.git_modified,
       description,
       headline: title,
-      inLanguage: "en",
+      inLanguage: 'en',
       // url: URL,
       name: title,
       image: {
-        "@type": "ImageObject",
+        '@type': 'ImageObject',
         url: article.frontmatter.featureImg
           ? article.frontmatter.featureImg.childImageSharp.fluid.src
-          : "",
+          : '',
       },
       mainEntityOfPage: {
-        "@type": "WebPage",
-        "@id": "https://google.com/article",
+        '@type': 'WebPage',
+        '@id': 'https://google.com/article',
       },
     }
   }
 
   const orgPage = (site, page) => ({
-    "@context": "http://schema.org",
-    "@type": "Article",
+    '@context': 'http://schema.org',
+    '@type': 'Article',
     author: {
-      "@id": `${site.siteMetadata.siteUrl}/#identity`,
+      '@id': `${site.siteMetadata.siteUrl}/#identity`,
     },
     copyrightHolder: {
-      "@id": `${site.siteMetadata.siteUrl}/#identity`,
+      '@id': `${site.siteMetadata.siteUrl}/#identity`,
     },
     // copyrightYear: postNode.first_publication_date,
     creator: {
-      "@id": `${site.siteMetadata.siteUrl}/#creator`,
+      '@id': `${site.siteMetadata.siteUrl}/#creator`,
     },
     publisher: {
-      "@id": `${site.siteMetadata.siteUrl}/#creator`,
+      '@id': `${site.siteMetadata.siteUrl}/#creator`,
     },
     datePublished: page.frontmatter.date,
     dateModified: page.fields.git_modified,
     description: page.excerpt,
     headline: page.frontmatter.title,
-    inLanguage: "en",
+    inLanguage: 'en',
     // url: URL,
     name: page.frontmatter.title,
     image: {
-      "@type": "ImageObject",
+      '@type': 'ImageObject',
       url: page.frontmatter.featureImg
         ? page.frontmatter.featureImg.childImageSharp.fluid.src
-        : "",
+        : '',
     },
     mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": "https://google.com/article",
+      '@type': 'WebPage',
+      '@id': 'https://google.com/article',
     },
   })
 
@@ -286,47 +286,35 @@ function SEO({ description, lang, meta, title, article, page }) {
         },
       ].concat(meta)}
     >
+      {article && <script type="application/ld+json">{JSON.stringify(schemaArticle)}</script>}
+      {page && <script type="application/ld+json">{JSON.stringify(orgPage(site, page))}</script>}
       {article && (
         <script type="application/ld+json">
-          {JSON.stringify(schemaArticle)}
+          {JSON.stringify(orgBreadcrumb(site, article, 'posts'))}
         </script>
       )}
       {page && (
         <script type="application/ld+json">
-          {JSON.stringify(orgPage(site, page))}
+          {JSON.stringify(orgBreadcrumb(site, page, 'page'))}
         </script>
       )}
-      {article && (
-        <script type="application/ld+json">
-          {JSON.stringify(orgBreadcrumb(site, article, "posts"))}
-        </script>
-      )}
-      {page && (
-        <script type="application/ld+json">
-          {JSON.stringify(orgBreadcrumb(site, page, "page"))}
-        </script>
-      )}
-      <script type="application/ld+json">
-        {JSON.stringify(orgCreator("identity", site))}
-      </script>
-      <script type="application/ld+json">
-        {JSON.stringify(orgCreator("creator", site))}
-      </script>
+      <script type="application/ld+json">{JSON.stringify(orgCreator('identity', site))}</script>
+      <script type="application/ld+json">{JSON.stringify(orgCreator('creator', site))}</script>
     </Helmet>
   )
 }
 
-SEO.defaultProps = {
+SEOComponent.defaultProps = {
   lang: `en`,
   meta: [],
   description: ``,
 }
 
-SEO.propTypes = {
+SEOComponent.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
 }
 
-export default SEO
+export default SEOComponent

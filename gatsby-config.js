@@ -1,113 +1,101 @@
 module.exports = {
   siteMetadata: {
-    siteUrl: `https://nikcub.me`,
-    title: `Nik Cubrilovic`,
-    author: `Nik Cubrliovic`,
-    description: `A weblog by Nik Cubrilovic`,
-    twitter: `nikcub`,
+    siteUrl: 'https://nikcub.me',
+    title: 'Nik Cubrilovic',
+    author: 'Nik Cubrliovic',
+    description: 'A weblog by Nik Cubrilovic',
+    twitter: 'nikcub',
     social: [
       {
-        name: `twitter`,
-        url: `https://twitter.com/nikcub`
+        name: 'twitter',
+        url: 'https://twitter.com/nikcub',
       },
       {
-        name: `github`,
-        url: `https://github.com/nc9`
-      }
-    ]
+        name: 'github',
+        url: 'https://github.com/nc9',
+      },
+    ],
   },
-  mapping: { "Mdx.fields.featuredImage": `File.absolutePath` },
+  mapping: { 'Mdx.fields.featuredImage': 'File.absolutePath' },
   plugins: [
-    `gatsby-plugin-react-helmet`,
+    'gatsby-plugin-react-helmet',
     {
-      resolve: `gatsby-plugin-react-helmet-canonical-urls`,
+      resolve: 'gatsby-plugin-react-helmet-canonical-urls',
       options: {
-        siteUrl: `https://nikcub.me`
+        siteUrl: 'https://nikcub.me',
         // noTrailingSlash: true,
-      }
+      },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
-    `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-twitter`,
-    `gatsby-plugin-emotion`,
-    `gatsby-plugin-theme-ui`,
+    'gatsby-plugin-emotion',
+    'gatsby-plugin-image',
+    'gatsby-plugin-sharp',
+    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-twitter',
+    'gatsby-plugin-theme-ui',
+    'gatsby-transformer-sharp',
     {
-      resolve: `gatsby-plugin-sitemap`,
+      resolve: 'gatsby-plugin-sitemap',
       options: {
-        exclude: ["/test-post"]
-      }
-    },
-    {
-      resolve: `gatsby-plugin-typography`,
-      options: {
-        pathToConfigModule: `src/utils/typography`
-      }
-    },
-    // {
-    //   resolve: `gatsby-transformer-remark`,
-    //   options: {
-
-    //   }
-    // },
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId: "UA-149334218-1"
-      }
+        exclude: ['/test-post'],
+      },
     },
     {
-      resolve: `gatsby-plugin-s3`,
+      resolve: 'gatsby-plugin-typography',
       options: {
-        bucketName: "nikcub.me"
-      }
+        pathToConfigModule: 'src/utils/typography',
+      },
     },
     {
-      resolve: `gatsby-plugin-mdx`,
+      resolve: 'gatsby-plugin-google-analytics',
       options: {
-        extensions: [`.mdx`, `.md`],
+        trackingId: 'UA-149334218-1',
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-s3',
+      options: {
+        bucketName: 'nikcub.me',
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-mdx',
+      options: {
+        extensions: ['.mdx', '.md'],
         gatsbyRemarkPlugins: [
           {
-            resolve: `gatsby-remark-images`,
+            resolve: 'gatsby-remark-images',
             options: {
               maxWidth: 960,
-              linkImagesToOriginal: false
-            }
+              linkImagesToOriginal: false,
+            },
           },
-          // { resolve: `gatsby-remark-copy-linked-files` },
-          { resolve: `gatsby-remark-smartypants` }
+          // { resolve: 'gatsby-remark-copy-linked-files' },
+          { resolve: 'gatsby-remark-smartypants' },
         ],
-        plugins: ["gatsby-remark-images"],
-        remarkPlugins: [require(`remark-slug`)]
-      }
+        plugins: ['gatsby-remark-images'],
+        remarkPlugins: [require('remark-slug')],
+      },
     },
     {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/src/images`,
-        name: `images`
-      }
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
+      resolve: 'gatsby-source-filesystem',
       options: {
         path: `${__dirname}/content/posts`,
-        name: `posts`
-      }
+        name: 'posts',
+      },
     },
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/content/pages`,
-        name: `mdx-pages`
-      }
+        path: './content/pages',
+        name: 'mdx-pages',
+      },
     },
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/content/assets`,
-        name: `assets`
-      }
-    }
-  ]
-};
+        path: './content/assets',
+        name: 'assets',
+      },
+    },
+  ],
+}

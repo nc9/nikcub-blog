@@ -2,38 +2,31 @@ const fs = require(`fs`)
 const path = require(`path`)
 const mkdirp = require(`mkdirp`)
 const crypto = require(`crypto`)
-const Debug = require(`debug`)
-const execa = require("execa")
+// const Debug = require(`debug`)
+const execa = require('execa')
 const { createFilePath } = require(`gatsby-source-filesystem`)
 const { urlResolve } = require(`gatsby-core-utils`)
 
-const debug = Debug()
+// const debug = Debug()
 
 const replaceTrailing = _path => _path.replace(/\/$/, ``)
 
 const withDefaults = themeOptions => {
-    const basePath = `/`
-    const postsPath = `${__dirname}/content/posts`
-    const pagesPath = `${__dirname}/content/pages`
-    const assetPath = `${__dirname}/content/assets`
+  const basePath = `/`
+  const postsPath = `${__dirname}/content/posts`
+  const pagesPath = `${__dirname}/content/pages`
+  const assetPath = `${__dirname}/content/assets`
 
-    return {
-        basePath,
-        postsPath,
-        pagesPath,
-        assetPath,
-    }
+  return {
+    basePath,
+    postsPath,
+    pagesPath,
+    assetPath,
+  }
 }
 
 const gitModified = async absolutePath => {
-
-  const { stdout } = await execa("git", [
-    "log",
-    "-1",
-    "--pretty=format:%aI",
-    "--",
-    absolutePath
-  ])
+  const { stdout } = await execa('git', ['log', '-1', '--pretty=format:%aI', '--', absolutePath])
 
   if (stdout) {
     return stdout
@@ -41,21 +34,20 @@ const gitModified = async absolutePath => {
 }
 
 const gitLogs = async absolutePath => {
-
-  const { stdout } = await execa("git", [
-    "log",
-    "-1",
-    "--pretty=format:%aI,%H,%h,%an,%ae,%s",
-    "--",
-    absolutePath
+  const { stdout } = await execa('git', [
+    'log',
+    '-1',
+    '--pretty=format:%aI,%H,%h,%an,%ae,%s',
+    '--',
+    absolutePath,
   ])
 
   if (!stdout) {
     return []
   }
 
-  let logs = stdout.split("\n").map(l => {
-    [date, hash, hash_short, author, email, message ] = l.split(",")
+  let logs = stdout.split('\n').map(l => {
+    ;[date, hash, hash_short, author, email, message] = l.split(',')
     return {
       date,
       hash,
@@ -69,98 +61,24 @@ const gitLogs = async absolutePath => {
   return logs
 }
 
+// exports.onCreateNode = ({ node, actions, getNode }) => {
+//   const { createNodeField } = actions
 
-// // Ensure that content directories exist at site-level
-// exports.onPreBootstrap = ({ store }, themeOptions) => {
-//   const { program } = store.getState()
-//   const { contentPath, assetPath } = withDefaults(themeOptions)
-
-//   console.log(themeOptions)
-
-//   const dirs = [
-//     path.join(program.directory, contentPath),
-//     path.join(program.directory, assetPath),
-//   ]
-
-//   dirs.forEach(dir => {
-//     debug(`Initializing ${dir} directory`)
-//     if (!fs.existsSync(dir)) {
-//       mkdirp.sync(dir)
-//     }
-//   })
-// }
-
-// const mdxResolverPassthrough = fieldName => async (
-//   source,
-//   args,
-//   context,
-//   info
-// ) => {
-//   const type = info.schema.getType(`Mdx`)
-//   const mdxNode = context.nodeModel.getNodeById({
-//     id: source.parent,
-//   })
-//   const resolver = type.getFields()[fieldName].resolve
-//   const result = await resolver(mdxNode, args, context, {
-//     fieldName,
-//   })
-//   return result
-// }
-
-// exports.createSchemaCustomization = ({ actions, schema }) => {
-//   const { createTypes } = actions
-//   createTypes(`interface BlogPost @nodeInterface {
-//       id: ID!
-//       title: String!
-//       body: String!
-//       slug: String!
-//       date: Date! @dateformat
-//       tags: [String]!
-//       keywords: [String]!
-//       excerpt: String!
-//   }`)
-
-//   createTypes(
-//     schema.buildObjectType({
-//       name: `MdxBlogPost`,
-//       fields: {
-//         id: { type: `ID!` },
-//         title: {
-//           type: `String!`,
-//         },
-//         slug: {
-//           type: `String!`,
-//         },
-//         date: { type: `Date!`, extensions: { dateformat: {} } },
-//         tags: { type: `[String]!` },
-//         keywords: { type: `[String]!` },
-//         excerpt: {
-//           type: `String!`,
-//           args: {
-//             pruneLength: {
-//               type: `Int`,
-//               defaultValue: 140,
-//             },
-//           },
-//           resolve: mdxResolverPassthrough(`excerpt`),
-//         },
-//         body: {
-//           type: `String!`,
-//           resolve: mdxResolverPassthrough(`body`),
-//         },
-//       },
-//       interfaces: [`Node`, `BlogPost`],
+// // Change the node internal type from 'allMarkdownRemark' to 'MarkdownRemark'
+//   if (node.internal.type === `MarkdownRemark`) {
+//     const value = createFilePath({ node, getNode })
+//     createNodeField({
+//       name: `slug`,
+//       node,
+//       value,
 //     })
-//   )
+//   }
 // }
 
 // // Create fields for post slugs and source
 // // This will change with schema customization with work
-exports.onCreateNode = async (
-  { node, actions, getNode, createNodeId },
-  themeOptions
-) => {
-  const { createNode, createNodeField } = actions
+exports.onCreateNode = async ({ node, actions, getNode, createNodeId }, themeOptions) => {
+  const { createNodeField } = actions
   const { postsPath, basePath } = withDefaults(themeOptions)
 
   // Make sure it's an MDX node
@@ -172,13 +90,11 @@ exports.onCreateNode = async (
   const fileNode = getNode(node.parent)
   const source = fileNode.sourceInstanceName
 
-  console.log(`${node.internal.type}, ${node.parent}, ${source}, ${postsPath}`)
+  // console.log(`${node.internal.type}, ${node.parent}, ${source}, ${postsPath}`)
   // console.log(fileNode)
 
-  if (node.internal.type === `Mdx` && ((source === "posts" || source === "mdx-pages" ))) {
+  if (node.internal.type === `Mdx` && (source === 'posts' || source === 'mdx-pages')) {
     let slug
-
-
 
     if (node.frontmatter.slug) {
       if (path.isAbsolute(node.frontmatter.slug)) {
@@ -227,19 +143,19 @@ exports.onCreateNode = async (
     createNodeField({
       node,
       name: `date_modified`,
-      value: fileNode.modifiedTime
+      value: fileNode.modifiedTime,
     })
 
     createNodeField({
       node,
       name: `git_modified`,
-      value: gitModDate
+      value: gitModDate,
     })
 
     createNodeField({
       node,
       name: `git_logs`,
-      value: git_logs
+      value: git_logs,
     })
 
     createNodeField({
@@ -260,25 +176,24 @@ exports.onCreateNode = async (
       value: source,
     })
 
-
-  //   const mdxBlogPostId = createNodeId(`${node.id} >>> MdxBlogPost`)
-  //   await createNode({
-  //     ...fieldData,
-  //     // Required fields.
-  //     id: mdxBlogPostId,
-  //     parent: node.id,
-  //     children: [],
-  //     internal: {
-  //       type: `MdxBlogPost`,
-  //       contentDigest: crypto
-  //         .createHash(`md5`)
-  //         .update(JSON.stringify(fieldData))
-  //         .digest(`hex`),
-  //       content: JSON.stringify(fieldData),
-  //       description: `Mdx implementation of the BlogPost interface`,
-  //     },
-  //   })
-  //   createParentChildLink({ parent: node, child: getNode(mdxBlogPostId) })
+    //   const mdxBlogPostId = createNodeId(`${node.id} >>> MdxBlogPost`)
+    //   await createNode({
+    //     ...fieldData,
+    //     // Required fields.
+    //     id: mdxBlogPostId,
+    //     parent: node.id,
+    //     children: [],
+    //     internal: {
+    //       type: `MdxBlogPost`,
+    //       contentDigest: crypto
+    //         .createHash(`md5`)
+    //         .update(JSON.stringify(fieldData))
+    //         .digest(`hex`),
+    //       content: JSON.stringify(fieldData),
+    //       description: `Mdx implementation of the BlogPost interface`,
+    //     },
+    //   })
+    //   createParentChildLink({ parent: node, child: getNode(mdxBlogPostId) })
   }
 }
 
@@ -292,20 +207,22 @@ exports.createPages = async ({ graphql, actions, reporter }, themeOptions) => {
   // const { basePath } = withDefaults(themeOptions)
 
   const result = await graphql(`
-  {
-    allMdx(sort: {fields: frontmatter___date, order: DESC}, filter: {fields: {source: {eq: "posts"}}}) {
-      edges {
-        node {
-          id
-          fields {
-            slug
-            source
+    {
+      allMdx(
+        sort: { fields: frontmatter___date, order: DESC }
+        filter: { fields: { source: { eq: "posts" } } }
+      ) {
+        edges {
+          node {
+            id
+            fields {
+              slug
+              source
+            }
           }
         }
       }
     }
-  }
-
   `)
 
   if (result.errors) {
@@ -318,7 +235,9 @@ exports.createPages = async ({ graphql, actions, reporter }, themeOptions) => {
 
   // Create a page for each Post
   posts.forEach(({ node: post }, index) => {
+    // console.log(posts)
     const previous = index === posts.length - 1 ? null : posts[index + 1]
+    // const previous = undefined
     const next = index === 0 ? null : posts[index - 1]
     const { slug } = post.fields
     createPage({
@@ -333,23 +252,20 @@ exports.createPages = async ({ graphql, actions, reporter }, themeOptions) => {
     })
   })
 
-
-
   const pageResults = await graphql(`
-  {
-    allMdx(filter: {fields: {source: {eq: "mdx-pages"}}}) {
-      edges {
-        node {
-          id
-          fields {
-            slug
-            source
+    {
+      allMdx(filter: { fields: { source: { eq: "mdx-pages" } } }) {
+        edges {
+          node {
+            id
+            fields {
+              slug
+              source
+            }
           }
         }
       }
     }
-  }
-
   `)
 
   if (pageResults.errors) {
