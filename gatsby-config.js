@@ -33,12 +33,12 @@ module.exports = {
     'gatsby-plugin-twitter',
     'gatsby-plugin-theme-ui',
     'gatsby-transformer-sharp',
-    {
-      resolve: 'gatsby-plugin-sitemap',
-      options: {
-        exclude: ['/test-post'],
-      },
-    },
+    // {
+    //   resolve: 'gatsby-plugin-sitemap',
+    //   options: {
+    //     exclude: ['/test-post'],
+    //   },
+    // },
     {
       resolve: 'gatsby-plugin-typography',
       options: {
