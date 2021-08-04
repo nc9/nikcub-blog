@@ -1,9 +1,9 @@
 /** @jsx jsx */
-import { jsx } from "@emotion/core"
-import styled from "@emotion/styled"
-import HeaderLink from "./HeaderLink"
-import HeaderMenuLink from "./HeaderMenuLink"
-import Img from "gatsby-image"
+import { jsx } from '@emotion/react'
+import styled from '@emotion/styled'
+import HeaderLink from './HeaderLink'
+import HeaderMenuLink from './HeaderMenuLink'
+import Img from 'gatsby-image'
 
 const Header = styled.header`
   background: rebeccapurple;
@@ -23,16 +23,20 @@ const HeaderMenu = styled.ul`
 const HeaderComponent = ({ headerImage, siteTitle }) => (
   <Header>
     <Menu>
-      { headerImage ? <Img
-        fixed={headerImage}
-        // objectFit="cover"
-        // objectPosition="50% 50%"
-        alt=""
-        css={{
-          "marginRight": "10px",
-          "marginTop": "0px"
-        }}
-      /> : undefined }
+      {headerImage ? (
+        <Img
+          fixed={headerImage}
+          // objectFit="cover"
+          // objectPosition="50% 50%"
+          alt=""
+          css={{
+            marginRight: '10px',
+            marginTop: '0px',
+          }}
+        />
+      ) : (
+        undefined
+      )}
       <HeaderLink>{siteTitle}</HeaderLink>
       <HeaderMenu>
         <HeaderMenuLink to="about">About</HeaderMenuLink>

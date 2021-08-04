@@ -1,7 +1,7 @@
 /** @jsx jsx */
-import { jsx } from "@emotion/core"
-import { Link } from "gatsby"
-import styled from "@emotion/styled"
+import { jsx } from '@emotion/react'
+import { Link } from 'gatsby'
+import styled from '@emotion/styled'
 
 const ListItem = styled.li`
   display: inline-block;
