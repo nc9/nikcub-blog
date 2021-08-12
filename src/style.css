@@ -1,3 +1,12 @@
 p > span > .gatsby-resp-image-imag {
   border: 3px solid silver;
 }
+
+.entryButton {
+  padding: 15px;
+  border: 2px solid blue;
+  background-color: blueviolet;
+  color: white;
+  font-weight: bold;
+  margin: 30px;
+}
