@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>PPV</title>
+
+    <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet" />
+    <script src="https://unpkg.com/video.js/dist/video.js"></script>
+    <script src="https://unpkg.com/videojs-contrib-hls/dist/videojs-contrib-hls.js"></script>
+  </head>
+  <body>
+    <video
+      id="my_video_1"
+      class="video-js vjs-fluid vjs-default-skin"
+      controls
+      preload="auto"
+      data-setup="{}"
+    >
+      <source
+        src="https://d3cdepf04uc2ji.cloudfront.net/out/v1/eee398435ef04e8ab423c3a80c33c319/index_4.m3u8?start=2021-11-17T18:00:00+11:00&generatedTimestamp=1637132400000&m=1637132400000&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiKjovL2QzY2RlcGYwNHVjMmppLmNsb3VkZnJvbnQubmV0L291dC92MS8qIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNjM3MTk3MjAwfX19XX0_&Key-Pair-Id=APKAJNNIFPMDGZBCTWJA&Signature=o2XEdYZJAN8od42ZMFAQU6n7Rj8XS7eM~Nbg-YqWDmVtctnz71mQOv9Oy0sWZwOiEv6pDrnHGxUvovjjZsklfQsFO1t-IxmC~a-721PraT6xaIC9lgECtLjNmLZkSyp-4Fy~8hAAdm7~uaHZkTu29jC9Mu06uEiBATE-PIJImKMcqN3T562T4U-UGmU6fU9JJSvWTJ-bjE8TErX4GUz25TWd1Rz7oyPq3JesJWS4Ot9We6kW0Wr6gs45Ki1bxvBlSimdYsmizIFutaNvdxjcH-1xzzzwz~i5B8FjcRnTniZ-~vrFFdVfaH34cP592UPXtJb6KMF1N8rejsBZaCcw0Q__"
+      />
+    </video>
+
+    <script>
+      var player = videojs('my_video_1')
+      player.play()
+    </script>
+  </body>
+</html>
